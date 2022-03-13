@@ -1,4 +1,6 @@
-require './Frame.rb'
+# frozen_string_literal: true
+
+require './frame'
 
 class Game
   def initialize(argv)
@@ -6,7 +8,7 @@ class Game
   end
 
   def calculate_score
-    @frames.map.with_index { |frame, index| Frame.new(*frame).calculate_score }.sum
+    @frames.map.with_index { |frame, _index| Frame.new(*frame).calculate_score }.sum
   end
 
   private
@@ -14,7 +16,7 @@ class Game
   def split_frames(argv)
     shots = argv.split(',').map { |shot| shot == 'X' ? 10 : shot.to_i }
     frames = []
-    9.times do |index|
+    9.times do |_index|
       frame = shots.shift(2)
       next_frame = shots.take(1)
       if frame.first == 10

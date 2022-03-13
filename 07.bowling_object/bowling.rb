@@ -1,4 +1,6 @@
-require_relative "./Game.rb"
+# frozen_string_literal: true
+
+require_relative './game'
 
 shots = ARGV[0]
 

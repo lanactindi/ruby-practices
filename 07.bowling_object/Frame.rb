@@ -1,7 +1,9 @@
-require './Shot.rb'
+# frozen_string_literal: true
+
+require './shot'
 
 class Frame
-  def initialize(first_shot = 0, second_shot = 0, third_shot = 0, next_shot = 0, after_next_shot = 0)
+  def initialize(first_shot, second_shot, third_shot = 0, next_shot = 0, after_next_shot = 0)
     @first_shot = Shot.new(first_shot).score
     @second_shot = Shot.new(second_shot).score
     @third_shot = Shot.new(third_shot).score
