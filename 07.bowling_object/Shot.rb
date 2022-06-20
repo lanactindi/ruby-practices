@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class Shot
-  def initialize(score)
-    @score = score
+  def initialize(mark)
+    @mark = mark
   end
 
   def score
-    @score == 'X' ? 10 : @score.to_i
+    @mark == 'X' ? 10 : @mark.to_i
   end
 end
