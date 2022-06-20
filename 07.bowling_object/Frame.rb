@@ -9,10 +9,6 @@ class Frame
     @third_shot = Shot.new(third_mark)
   end
 
-  def first_score
-    @first_shot.score
-  end
-
   def first_and_second_score
     @first_shot.score + @second_shot.score
   end
@@ -23,13 +19,5 @@ class Frame
     else
       first_and_second_score
     end
-  end
-
-  def frame_strike?
-    @first_shot.score == 10
-  end
-
-  def frame_spare?
-    ((@first_shot.score + @second_shot.score) == 10) && !frame_strike?
   end
 end
