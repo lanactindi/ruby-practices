@@ -14,14 +14,11 @@ class Game
   private
 
   def split_frames(argv)
-    shots = argv.split(',').map { |shot| shot == 'X' ? 10 : shot.to_i }
-    frames = []
-    (0..18).each do |i|
-      if i.even?
-        shots.insert(i + 1, shots[i + 2]) if shots[i] == 10
-        frames << Frame.new(shots[i], shots[i + 1], shots[i + 2])
-      end
-    end
-    frames
+    shots = argv.split(',').map { |shot| Shot.new(shot).score }
+    (0..18).map do |i|
+      next if i.odd?
+      shots.insert(i + 1, shots[i + 2]) if shots[i] == 10
+      Frame.new(shots[i], shots[i + 1], shots[i + 2])
+    end.compact
   end
 end
