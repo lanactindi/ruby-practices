@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require './shot'
+require_relative './shot'
 
 class Frame
   def initialize(first_mark, second_mark, third_mark)

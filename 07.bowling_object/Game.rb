@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-require './frame'
+require_relative './frame'
+
+FRAMES = 9
 
 class Game
   def initialize(argv)
@@ -15,7 +17,7 @@ class Game
 
   def split_frames(argv)
     shots = argv.split(',').map { |shot| Shot.new(shot).score }
-    (0..18).map do |i|
+    (0..FRAMES*2).map do |i|
       next if i.odd?
       shots.insert(i + 1, shots[i + 2]) if shots[i] == 10
       Frame.new(shots[i], shots[i + 1], shots[i + 2])
