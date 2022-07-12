@@ -56,7 +56,7 @@ class LS
   end
 
   def print_file_detail(file)
-    str = '%s  %s  %s  %s  %s  %s  %s'
+    str = '%5s  %5s  %5s  %5s  %5s  %5s  %5s'
     file_detail = [print_file_permissions(file),
                    File.lstat(file).nlink.to_s, user_name(File.lstat(file).uid),
                    group_name(File.lstat(file).gid),
