@@ -1,38 +1,28 @@
 # frozen_string_literal: true
 
+require 'etc'
 require 'optparse'
+require_relative 'printer'
 
 class LS
   def initialize
     opt = OptionParser.new
+    @printer = Printer.new
     @option = {}
 
     opt.on('-a') { |v| @option[:a] = v }
     opt.on('-r') { |v| @option[:r] = v }
+    opt.on('-l') { |v| @option[:l] = v }
     opt.parse!(ARGV)
   end
 
   def exec
-    if @option.empty?
-      Dir.glob('*')
-    elsif @option[:r]
-      Dir.glob('*').reverse
-    else
-      Dir.glob('*', File::FNM_DOTMATCH)
-    end
-  end
+    files = Dir.glob('*', @option[:a] ? File::FNM_DOTMATCH : 0)
+    files.reverse! if @option[:r]
+    return @printer.print_detail_lines(files) if @option[:l]
 
-  def print_files
-    files = exec
-    # カラムを変更する変数
-    columns = 3
-    number_of_rows = (files.length % columns).zero? ? files.length / columns : files.length / columns + 1
-    tab_files = files.each_slice(number_of_rows).to_a
-    (0..(number_of_rows - 1)).each do |i|
-      lines = tab_files.map { |file| file[i]&.slice(0, 15)&.ljust(20) unless file[i].nil? }.compact
-      puts lines.join('')
-    end
+    @printer.print_files_names(files)
   end
 end
 
-LS.new.print_files
+LS.new.exec
